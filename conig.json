@@ -1,0 +1,60 @@
+{
+    "output_dir": "output",
+    "text_to_image": {
+      "model_id": "stabilityai/stable-diffusion-xl-base-1.0",
+      "device": "cuda",
+      "views": [
+        {
+          "view_name": "front",
+          "prompt_suffix": "front view, orthographic projection, blueprint style, white background, clear details",
+          "negative_prompt": "blurry, low quality, incomplete, cropped",
+          "guidance_scale": 7.5,
+          "num_inference_steps": 50
+        },
+        {
+          "view_name": "side",
+          "prompt_suffix": "side view, orthographic projection, blueprint style, white background, clear details",
+          "negative_prompt": "blurry, low quality, incomplete, cropped",
+          "guidance_scale": 7.5,
+          "num_inference_steps": 50
+        },
+        {
+          "view_name": "top",
+          "prompt_suffix": "top view, orthographic projection, blueprint style, white background, clear details",
+          "negative_prompt": "blurry, low quality, incomplete, cropped",
+          "guidance_scale": 7.5,
+          "num_inference_steps": 50
+        }
+      ]
+    },
+    "image_to_parts": {
+      "sam_checkpoint": "sam_vit_h_4b8939.pth",
+      "sam_model_type": "vit_h",
+      "device": "cuda",
+      "view_names": ["front", "side", "top"]
+    },
+    "part_to_lego": {
+      "lego_db_path": "data/lego_components.json",
+      "device": "cuda",
+      "voxel_resolution": 32,
+      "min_components": 5,
+      "max_components": 50
+    },
+    "submodel_assembler": {
+      "device": "cuda",
+      "assembly_method": "graph",
+      "spacing": 2.0,
+      "max_iterations": 100
+    },
+    "verifier": {
+      "strict_mode": false,
+      "connection_tolerance": 0.1,
+      "stability_factor": 0.3
+    },
+    "instruction_generator": {
+      "page_size": "letter",
+      "step_size": 5,
+      "include_part_list": true,
+      "include_sub_assembly": true
+    }
+  }
